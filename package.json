@@ -1,0 +1,57 @@
+{
+  "name": "objection-graphql-relay",
+  "version": "0.0.1",
+  "description": "Helpers for combining Objection models with GraphQL Relay",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "lint": "eslint index.js",
+    "release": "standard-version -r"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sammarks/objection-graphql-relay.git"
+  },
+  "jest": {
+    "setupTestFrameworkScriptFile": "<rootDir>/jest_framework_setup.js"
+  },
+  "keywords": [
+    "objection",
+    "graphql",
+    "relay",
+    "helpers"
+  ],
+  "author": "Sam Marks <sam@sammarks.me>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sammarks/objection-graphql-relay/issues"
+  },
+  "homepage": "https://github.com/sammarks/objection-graphql-relay#readme",
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "chai-as-promised": "^7.1.1",
+    "chai-subset": "^1.6.0",
+    "dirty-chai": "^2.0.1",
+    "eslint": "^5.5.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-node": "^7.0.1",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "graphql": "^14.0.2",
+    "jest": "^23.5.0",
+    "jest-junit": "^5.1.0",
+    "knex": "^0.15.2",
+    "objection": "^1.2.6",
+    "sqlite3": "^4.0.2",
+    "standard-version": "^4.4.0"
+  },
+  "peerDependencies": {
+    "objection": "^1.0.0"
+  },
+  "dependencies": {
+    "graphql-relay": "^0.5.5",
+    "lodash": "^4.17.10",
+    "promise-defer": "^1.0.0"
+  }
+}
