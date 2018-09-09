@@ -113,6 +113,7 @@ cards.js
 ```js
 const getCards = (first, after) => {
   const query = Card.query().limit(first)
+    .orderBy('id', 'asc') // Cursors are ID-based currently (will have to support sorting later).
   if (after) {
     return query.offset(after).range()
   } else {
