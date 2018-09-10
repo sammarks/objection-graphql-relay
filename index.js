@@ -38,7 +38,7 @@ const connectionWrapper = (field) => {
     const { collectionInfo, args } = field
     if (_.isArray(collectionInfo) && _.isObject(args) && !_.isArray(args)) {
       return _connectionMapper(collectionInfo, args, collectionInfo.length)
-    } else if (_.isObject(collectionInfo) && _.isArray(collectionInfo.results) && collectionInfo.total) {
+    } else if (_.isObject(collectionInfo) && _.isArray(collectionInfo.results) && collectionInfo.total !== undefined) {
       return _connectionMapper(collectionInfo.results, args, collectionInfo.total)
     }
   }

@@ -119,6 +119,40 @@ describe('#connectionWrapper()', () => {
       ])
     })
   })
+  describe('when passed an object and collectionInfo is an object', () => {
+    let result
+    beforeEach(async () => {
+      const args = { first: 1, after: offsetToCursor(1) }
+      const collectionInfo = {
+        results: [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }],
+        total: 10
+      }
+      result = await connectionWrapper({ collectionInfo, args })
+    })
+    it('returns totalCount properly', () => {
+      expect(result.totalCount).to.equal(10)
+    })
+    it('sets hasPreviousPage properly', () => {
+      expect(result.pageInfo.hasPreviousPage).to.be.true()
+    })
+    it('sets hasNextPage properly', () => {
+      expect(result.pageInfo.hasNextPage).to.be.true()
+    })
+  })
+  describe('when passed an object and collectionInfo is an object with 0 items', () => {
+    let result
+    beforeEach(async () => {
+      const args = { first: 10, after: null }
+      const collectionInfo = {
+        results: [],
+        total: 0
+      }
+      result = await connectionWrapper({ collectionInfo, args })
+    })
+    it('returns totalCount properly', () => {
+      expect(result.totalCount).to.equal(0)
+    })
+  })
   describe('when passed an object and collectionInfo is an array', () => {
     let result
     beforeEach(async () => {
