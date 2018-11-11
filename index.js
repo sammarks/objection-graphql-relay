@@ -1,4 +1,4 @@
-const { Model, QueryBuilder: ObjectionQueryBuilder } = require('objection')
+const { Model } = require('objection')
 const {
   toGlobalId,
   offsetToCursor,
@@ -136,15 +136,7 @@ const pagedRelationQuery = (instance, field, first, after, extraFilter = default
   })
 }
 
-class QueryBuilder extends ObjectionQueryBuilder {
-  static forClass (modelClass) {
-    const builder = new this(modelClass)
-    return builder.context({ modelClass })
-  }
-}
-
 const relayModel = (ModelClass) => {
-  ModelClass.QueryBuilder = QueryBuilder
   ModelClass.prototype.pagedRelationQuery = function (field, first = 10, after = null, extraFilter, orderBy) {
     return pagedRelationQuery(this, field, first, after, extraFilter, orderBy)
   }
@@ -158,6 +150,5 @@ module.exports = {
   connectionWrapper,
   pagedRelationQuery,
   range,
-  QueryBuilder,
   relayModel
 }
