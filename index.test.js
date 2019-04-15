@@ -62,9 +62,13 @@ describe('#connectionWrapper()', () => {
     expect(result.pageInfo.hasPreviousPage).to.be.true()
   })
   it('respects cursors', async () => {
-    await connectionWrapper('Boom')(parentStub, { first: 2, after: offsetToCursor(1) })
+    const result = await connectionWrapper('Boom')(parentStub, { first: 2, after: offsetToCursor(1) })
     expect(parentStub.paginatedBoom.mock.calls[0][0]).to.equal(2)
-    expect(parentStub.paginatedBoom.mock.calls[0][1]).to.equal(cursorToOffset(offsetToCursor(1)))
+    expect(parentStub.paginatedBoom.mock.calls[0][1]).to.equal(cursorToOffset(offsetToCursor(2)))
+    expect(result.edges.map((edge) => edge.cursor)).to.deep.equal([
+      offsetToCursor(2),
+      offsetToCursor(3)
+    ])
   })
   it('handles an empty array of results', async () => {
     parentStub.paginatedBoom = jest.fn(() => Promise.resolve({

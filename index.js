@@ -9,14 +9,14 @@ const _ = require('lodash')
 const defer = require('promise-defer')
 
 const _connectionMapper = (array, { first, after }, total) => {
-  after = after ? cursorToOffset(after) : 0
+  after = after ? cursorToOffset(after) + 1 : 0
   return {
     pageInfo: {
       hasPreviousPage: !!after,
       hasNextPage: total > (after + first)
     },
     edges: array.map((node, index) => {
-      return { cursor: offsetToCursor(index), node }
+      return { cursor: offsetToCursor(index + after), node }
     }),
     totalCount: total
   }
@@ -25,7 +25,7 @@ const _connectionMapper = (array, { first, after }, total) => {
 const connectionWrapper = (field) => {
   if (_.isString(field)) {
     return (parent, args) => {
-      const after = args.after ? cursorToOffset(args.after) : null
+      const after = args.after ? cursorToOffset(args.after) + 1 : null
       return parent['paginated' + field](args.first, after, args).then((result) => {
         return _connectionMapper(result.results, args, result.total)
       })
