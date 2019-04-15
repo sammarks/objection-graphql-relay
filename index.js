@@ -16,11 +16,8 @@ const _connectionMapper = (array, { first, after }, total) => {
       hasPreviousPage: !!after,
       hasNextPage: total > (after + first)
     },
-    edges: array.map((node) => {
-      if (!node.id) {
-        throw new Error(`Came across node without an ID: ${util.inspect(node)}`)
-      }
-      return { cursor: offsetToCursor(node.id), node }
+    edges: array.map((node, index) => {
+      return { cursor: offsetToCursor(index), node }
     }),
     totalCount: total
   }

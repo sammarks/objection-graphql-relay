@@ -76,17 +76,6 @@ describe('#connectionWrapper()', () => {
     expect(result.pageInfo.hasNextPage).to.be.false()
     expect(result.pageInfo.hasPreviousPage).to.be.false()
   })
-  it('throws an error for nodes that dont have an id', () => {
-    parentStub.paginatedBoom = jest.fn(() => Promise.resolve({
-      results: [
-        { id: 'foobar' },
-        { foo: 'bar' }
-      ],
-      total: 2
-    }))
-    return expect(connectionWrapper('Boom')(parentStub, { first: 10 })).to.be
-      .rejectedWith(/Came across node without an ID:/i)
-  })
   describe('when passed a string', () => {
     let result
     beforeEach(async () => {
@@ -103,8 +92,8 @@ describe('#connectionWrapper()', () => {
     })
     it('assigns cursors properly', () => {
       expect(result.edges.map((edge) => edge.cursor)).to.deep.equal([
-        offsetToCursor(toGlobalId('Foo', 1)),
-        offsetToCursor(toGlobalId('Foo', 2))
+        offsetToCursor(0),
+        offsetToCursor(1)
       ])
     })
     it('returns the results properly', () => {
@@ -204,7 +193,7 @@ describe('#connectionWrapper()', () => {
     })
     it('assigns cursors properly', () => {
       expect(result.edges.map((edge) => edge.cursor)).to.deep.equal([
-        offsetToCursor(2)
+        offsetToCursor(0)
       ])
     })
     it('returns the results properly', () => {
