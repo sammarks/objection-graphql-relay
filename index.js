@@ -5,7 +5,6 @@ const {
   cursorToOffset,
   fromGlobalId: graphqlFromGlobalId
 } = require('graphql-relay')
-const util = require('util')
 const _ = require('lodash')
 const defer = require('promise-defer')
 
