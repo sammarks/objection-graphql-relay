@@ -18,7 +18,7 @@ const _connectionMapper = (array, { first, after }, total) => {
     edges: array.map((node, index) => {
       return { cursor: offsetToCursor(index + after), node }
     }),
-    totalCount: total
+    totalCount: total || 0
   }
 }
 
