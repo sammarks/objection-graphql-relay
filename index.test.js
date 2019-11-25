@@ -187,7 +187,7 @@ describe('#connectionWrapper()', () => {
       }
     ]
     beforeEach(async () => {
-      result = await connectionWrapper({collectionInfo: storeItems, args: {first: 2}})
+      result = await connectionWrapper({ collectionInfo: storeItems, args: { first: 2 } })
     })
     it('does not have previous page', () => {
       expect(result.pageInfo.hasPreviousPage).to.be.false()
@@ -231,16 +231,16 @@ describe('#connectionWrapper()', () => {
       expect(() => connectionWrapper([])).to.throw(Error, err)
     })
     it('throws an error when argument is an object and doesnt contain array', () => {
-      expect(() => connectionWrapper({args: { first: 1 }})).to.throw(Error, err)
+      expect(() => connectionWrapper({ args: { first: 1 } })).to.throw(Error, err)
     })
     it('throws an error when argument is an object and doesnt contain args', () => {
-      expect(() => connectionWrapper({collectionInfo: []})).to.throw(Error, err)
+      expect(() => connectionWrapper({ collectionInfo: [] })).to.throw(Error, err)
     })
     it('throws an error when argument is an object and array is invalid', () => {
-      expect(() => connectionWrapper({collectionInfo: 1})).to.throw(Error, err)
+      expect(() => connectionWrapper({ collectionInfo: 1 })).to.throw(Error, err)
     })
     it('throws an error when argument is an object and args is invalid', () => {
-      expect(() => connectionWrapper({collectionInfo: [], args: 1})).to.throw(Error, err)
+      expect(() => connectionWrapper({ collectionInfo: [], args: 1 })).to.throw(Error, err)
     })
   })
 })
@@ -366,14 +366,14 @@ describe('#pagedRelationQuery()', () => {
     expect(result.results[0]).to.containSubset({ id: secondCard.id })
   })
   it('supports paging', async () => {
-    const result = await card.pagedRelationQuery('tags', 3, 3)
+    const result = await card.pagedRelationQuery('tags', 3, 2)
     expect(result.results.length).to.equal(2)
     expect(result.results[0]).to.containSubset({ name: 'tag four' })
     expect(result.results[1]).to.containSubset({ name: 'tag five' })
     expect(result.total).to.equal(5)
   })
   it('supports deep paging', async () => {
-    const result = await card.pagedRelationQuery('tags.cards', 20, 3)
+    const result = await card.pagedRelationQuery('tags.cards', 20, 2)
     expect(result.results.length).to.equal(1)
     expect(result.results[0]).to.containSubset({ id: thirdCard.id })
   })

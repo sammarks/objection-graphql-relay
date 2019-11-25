@@ -117,7 +117,7 @@ const pagedRelationQuery = (instance, field, first, after, extraFilter = default
     orderBy,
     excludeSelf: excludeSelf(instance.constructor.tableName, instance.id),
     extraFilter,
-    range: range(first, after, totalDeferred)
+    range: range(first, after ? after + 1 : after, totalDeferred)
   }).then((result) => {
     const results = field.split('.').reduce((finalResult, segment) => {
       return _.uniqBy(_.flatten(finalResult.map((item) => item[segment])), 'id')
