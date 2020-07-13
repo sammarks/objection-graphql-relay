@@ -44,7 +44,7 @@
     "knex": "^0.15.2",
     "objection": "^1.2.6",
     "sqlite3": "^4.0.2",
-    "standard-version": "^4.4.0"
+    "standard-version": "^8.0.1"
   },
   "peerDependencies": {
     "objection": "^1.0.0"
