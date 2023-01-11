@@ -41,7 +41,7 @@
     "graphql": "^14.0.2",
     "jest": "^23.6.0",
     "jest-junit": "^5.1.0",
-    "knex": "^0.15.2",
+    "knex": "^2.4.0",
     "objection": "^1.2.6",
     "sqlite3": "^4.0.2",
     "standard-version": "^4.4.0"
